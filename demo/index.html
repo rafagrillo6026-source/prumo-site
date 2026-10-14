@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Prumo Obras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2v15"/><path d="M10 17h12l-6 13z" class="fill"/><circle cx="16" cy="3" r="1.6" class="fill"/></svg>
+      <b>Prumo</b>
+    </div>
+    <a class="voltar" id="voltarSite" href="../index.html">← Voltar ao site</a>
+    <div class="emp" id="emp">
+      <span class="k">Empreendimento</span>
+      <b>Edifício Aurora</b>
+    </div>
+    <div class="persp" role="group" aria-label="Escolher visão">
+      <button data-persp="comprador" aria-pressed="true">Comprador</button>
+      <button data-persp="construtora" aria-pressed="false">Construtora</button>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Seções"></nav>
+
+  <div class="stage">
+    <div class="viewport" id="viewport">
+      <canvas id="gl"></canvas>
+      <div class="labels" id="labels"></div>
+      <div class="vp-hud mono" id="hud"></div>
+      <div class="vp-hint mono" id="hint">Arraste para girar · role para aproximar</div>
+      <div class="loading mono" id="loading">Carregando 3D…</div>
+    </div>
+    <aside class="panel" id="panel"></aside>
+  </div>
+
+  <div class="demo-flag mono">DEMONSTRAÇÃO · dados fictícios · <button id="resetDemo" type="button">restaurar</button></div>
+</div>
+
+<div id="toast" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/utils/BufferGeometryUtils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/utils/SkeletonUtils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/environments/RoomEnvironment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/loaders/RGBELoader.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

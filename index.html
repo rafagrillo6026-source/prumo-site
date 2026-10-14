@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Prumo · Gestão de obras com 3D e portal do comprador</title>
+<meta name="description" content="Software de gestão de obras por assinatura: cronograma, custo, equipe, EPIs, materiais e máquinas, com a obra em 3D e um portal para o comprador acompanhar o próprio apartamento. Teste grátis por 14 dias.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Prumo">
+<meta property="og:title" content="Prumo · Sua obra no prumo, do canteiro ao escritório">
+<meta property="og:description" content="Gestão de obras com a obra em 3D e portal do comprador. Teste grátis por 14 dias, sem cartão.">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0D0F12">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230D0F12'/%3E%3Cpath d='M16 4v13' stroke='%23E2805C' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M10 17h12l-6 12z' fill='%23E2805C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Prumo, início">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2v15"/><path d="M10 17h12l-6 13z" class="fill"/><circle cx="16" cy="3" r="1.6" class="fill"/></svg>
+      <b>Prumo</b>
+    </a>
+    <nav class="menu" aria-label="Seções">
+      <a href="#modulos">Módulos</a>
+      <a href="#vendas">Para vendas</a>
+      <a href="#como">Como funciona</a>
+      <a href="#planos">Planos</a>
+      <a href="#perguntas">Perguntas</a>
+    </nav>
+    <a class="btn primary" href="#contato">Testar 14 dias grátis</a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="k" style="color:var(--terra-2)">Software de gestão de obras · assinatura mensal</p>
+        <h1 style="margin-top:16px">Sua obra no <em>prumo</em>, do canteiro ao escritório.</h1>
+        <p class="lead">O Prumo reúne cronograma, custo, equipe, EPIs, materiais e máquinas de todas as suas obras em um só lugar, com a obra em 3D atualizada a cada registro de evolução. E o seu comprador acompanha a evolução do próprio apartamento.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#contato">Começar teste grátis</a>
+          <a class="btn" href="demo/index.html">Ver demonstração ao vivo →</a>
+        </div>
+        <div class="proof"><span>Sem fidelidade</span><span>Sem taxa de implantação</span><span>Funciona no celular do mestre de obras</span></div>
+      </div>
+
+      <figure class="console reel">
+        <div class="console-bar">
+          <svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true" style="fill:none;stroke:var(--terra-2);stroke-width:2;stroke-linecap:round"><path d="M16 2v15"/><path d="M10 17h12l-6 13z" style="fill:var(--terra-2);stroke:none"/></svg>
+          <div class="emp"><span class="k">Demonstração</span><b>Edifício Aurora</b></div>
+          <span class="reel-cap" id="reelCap" aria-hidden="true">Obra crescendo por etapa</span>
+        </div>
+        <video id="reel" src="assets/demo-hero.mp4" poster="assets/demo-hero.jpg" muted playsinline loop preload="metadata" width="960" height="720"
+          aria-label="Gravação da demonstração: o Edifício Aurora cresce etapa por etapa em 3D e depois a câmera passeia pela sala do apartamento, de dia e de noite."></video>
+        <figcaption class="console-note">Gravação da demonstração com dados fictícios · <a href="demo/index.html">abrir a demo →</a></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="ruler">
+    <div class="wrap">
+      <div class="cell"><b>8</b><p>módulos integrados em uma assinatura</p></div>
+      <div class="cell"><b>2</b><p>visões: construtora e comprador</p></div>
+      <div class="cell"><b>3D</b><p>da fundação à fachada, por etapa</p></div>
+      <div class="cell"><b>NR-6 · NR-35</b><p>controle de EPI com número de CA</p></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <span class="k">O problema</span>
+        <h2>A obra anda. A planilha fica para trás.</h2>
+        <p class="lead">Diário em papel, estoque no caderno do almoxarife, custo no Excel do escritório e o comprador ligando para saber em que andar a obra está. O Prumo junta tudo isso num registro só.</p>
+      </div>
+      <div class="pain">
+        <div><s>Planilha de custo atualizada no fim do mês</s><p><b>Curva S e orçamento por etapa</b> recalculados a cada registro de evolução, com desvio de prazo e custo à vista.</p></div>
+        <div><s>Falta de material descoberta na hora da concretagem</s><p><b>Estoque com consumo semanal</b>: o Prumo avisa quantos dias cada insumo ainda dura e sugere o lote de compra.</p></div>
+        <div><s>Comprador pedindo foto pelo WhatsApp</s><p><b>Portal do comprador</b> com a evolução do apartamento dele em 3D, andar por andar, e as atualizações da obra.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="modulos" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <span class="k">Módulos</span>
+        <h2>Tudo o que acontece no canteiro, num só sistema.</h2>
+        <p class="lead">Cada módulo conversa com os outros. Cada evolução registrada atualiza o 3D, o cronograma, a curva de custo e o que o comprador vê.</p>
+      </div>
+      <div class="mods">
+        <article class="mod">
+          <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 28h24M7 28V10l9-6 9 6v18M12 28v-7h8v7M11 14h2M19 14h2"/></svg>
+          <h3>Carteira de obras</h3>
+          <p>Todos os empreendimentos lado a lado: prédios, condomínios e loteamentos, com avanço e pendências de cada um.</p>
+          <ul><li>Painel por obra</li><li>Obras com pendência</li></ul>
+        </article>
+        <article class="mod">
+          <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 4 9.5v13L16 29l12-6.5v-13zM4 9.5 16 16l12-6.5M16 16v13"/></svg>
+          <h3>Planta 3D e evolução</h3>
+          <p>A obra em 3D cresce conforme você registra a evolução de fundação, estrutura, alvenaria, instalações e fachada.</p>
+          <ul><li>Registrar evolução</li><li>Vista dia e noite</li></ul>
+        </article>
+        <article class="mod">
+          <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><circle cx="11" cy="10" r="4"/><circle cx="23" cy="12" r="3"/><path d="M3 27c0-4.4 3.6-8 8-8s8 3.6 8 8M19 27c0-3 1.8-6 5-6s5 3 5 6"/></svg>
+          <h3>Equipe e presença</h3>
+          <p>Funcionários por função, frentes de trabalho do dia, presença da semana, faltas, férias e folha estimada.</p>
+          <ul><li>Presentes · faltas · férias</li><li>Frentes de trabalho hoje</li></ul>
+        </article>
+        <article class="mod">
+          <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 20a11 11 0 0 1 22 0M3 20h26v3H3zM16 9V6M12 20v-6M20 20v-6"/></svg>
+          <h3>Segurança e EPIs</h3>
+          <p>Entrega de EPI por funcionário com número de CA, estoque mínimo, treinamentos NR-35 e exames em dia.</p>
+          <ul><li>EPIs entregues</li><li>Treinamentos e saúde</li></ul>
+        </article>
+        <article class="mod">
+          <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 12h24v16H4zM4 12l3-6h18l3 6M12 18h8"/></svg>
+          <h3>Materiais e estoque</h3>
+          <p>Cimento, aço, blocos, areia, brita e revestimento com consumo semanal, estoque mínimo e alerta de reposição.</p>
+          <ul><li>Dias de estoque restante</li><li>Últimas movimentações</li></ul>
+        </article>
+        <article class="mod">
+          <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 28V4h3v24M11 6h17l-3 4H11M4 28h12M22 10v8"/><path d="M20 18h4v3h-4z"/></svg>
+          <h3>Pátio de máquinas</h3>
+          <p>Grua, betoneira, escavadeira, munck, elevador e caminhões: onde está cada equipamento e qual frente atende.</p>
+          <ul><li>Grua e elevador</li><li>Equipamentos de terraplenagem</li></ul>
+        </article>
+        <article class="mod">
+          <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 27h24M4 27V5M4 25c6 0 8-3 11-9s5-9 13-10"/><circle cx="15" cy="16" r="2"/></svg>
+          <h3>Orçamento e cronograma</h3>
+          <p>Orçado e realizado por etapa, curva S de custo acumulado e cronograma com o desvio de cada frente.</p>
+          <ul><li>Curva S</li><li>Cronograma por etapa</li></ul>
+        </article>
+        <article class="mod">
+          <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 28V8l10-4 10 4v20M6 28h20M12 12h3v3h-3zM17 12h3v3h-3zM12 18h3v3h-3zM17 18h3v3h-3z"/></svg>
+          <h3>Portal do comprador</h3>
+          <p>Cada cliente vê o próprio apartamento ou lote, anda pelo apê em 3D, consulta o condomínio, o bairro e as atualizações.</p>
+          <ul><li>Meu apê · Andar pelo apê</li><li>Bairro e trajetos</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <span class="k">Duas visões, um só sistema</span>
+        <h2>Gestão para a construtora. Confiança para quem comprou.</h2>
+        <p class="lead">O mesmo empreendimento aparece de dois jeitos. A construtora controla tudo. O comprador vê só o que importa para ele, sempre com o dado mais recente.</p>
+      </div>
+      <div class="dual">
+        <div class="view">
+          <span class="who">Construtora</span>
+          <h3>Controle de obra completo</h3>
+          <ul>
+            <li><span><b>Visão geral</b> com avanço, custo, prazo e pontos de atenção</span></li>
+            <li><span><b>Equipe</b> por função, com salário e presença</span></li>
+            <li><span><b>Materiais e EPIs</b> com estoque mínimo e alerta</span></li>
+            <li><span><b>Orçamento</b> por etapa e curva S</span></li>
+            <li><span><b>Lotes e unidades</b> disponíveis, reservados e vendidos</span></li>
+          </ul>
+        </div>
+        <div class="view alt">
+          <span class="who">Comprador</span>
+          <h3>Acompanhamento do imóvel</h3>
+          <ul>
+            <li><span><b>Minha obra</b>: em que etapa e andar a construção está</span></li>
+            <li><span><b>Meu apê</b> destacado no prédio, com planta 3D dos cômodos</span></li>
+            <li><span><b>Condomínio</b>: piscina, quadra, clube e quando ficam prontos</span></li>
+            <li><span><b>Arredores</b>: escolas, mercados e trajetos</span></li>
+            <li><span><b>Atualizações da obra</b> publicadas pela construtora</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="vendas" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <span class="k">Para incorporadoras e marketing</span>
+        <h2>O 3D que acompanha a obra também vende a obra.</h2>
+        <p class="lead">O mesmo modelo que a engenharia atualiza no canteiro vira material de venda: o corretor mostra o lote com preço e vista, e o cliente anda pelo apartamento antes de a laje subir.</p>
+      </div>
+      <div class="sell">
+        <div class="lotmap">
+          <div class="console-bar">
+            <div class="emp"><span class="k">Condomínio</span><b>Reserva das Águas</b></div>
+            <span class="k" style="margin-left:auto">Toque num lote</span>
+          </div>
+          <svg id="lotes" viewBox="0 0 480 300" role="group" aria-label="Mapa de lotes do condomínio, com dados ilustrativos"></svg>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:color-mix(in srgb, var(--green) 20%, var(--panel))"></i>Disponível</span>
+            <span><i style="background:color-mix(in srgb, var(--gold) 22%, var(--panel))"></i>Reservado</span>
+            <span><i style="background:var(--panel-2)"></i>Vendido</span>
+          </div>
+          <div class="lot-info" id="lotInfo" aria-live="polite">
+            <div><span class="k">Lote</span><b data-f="n">—</b></div>
+            <div><span class="k">Área</span><b data-f="a">—</b></div>
+            <div><span class="k">Situação</span><b data-f="s">—</b></div>
+            <div><span class="k">Preço</span><b data-f="p">—</b></div>
+            <p class="vista" data-f="v">Escolha um lote no mapa.</p>
+          </div>
+          <p class="console-note">Exemplo ilustrativo com dados fictícios</p>
+        </div>
+        <div class="sell-side">
+          <h3>Ferramenta de venda, não só de obra</h3>
+          <ul>
+            <li><span><b>Lotes e unidades com preço e situação</b>: disponível, reservado ou vendido, atualizados pela própria equipe comercial.</span></li>
+            <li><span><b>A vista de cada lote</b>, a área de lazer e os arredores mostrados no 3D do condomínio.</span></li>
+            <li><span><b>O apartamento antes de pronto</b>: planta 3D com medidas, passeio na altura dos olhos de dia e de noite, com móveis em escala.</span></li>
+            <li><span><b>Portal com a marca da incorporadora</b> no plano Incorporadora.</span></li>
+            <li><span><b>Bairro e trajetos</b> até o trabalho e a escola<span class="soon">protótipo</span></span></li>
+          </ul>
+          <div class="ctas">
+            <a class="btn primary" href="#contato" data-plan="Incorporadora">Falar com vendas</a>
+            <a class="btn" href="demo/index.html#condominio">Ver o condomínio na demo →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="como" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <span class="k">Como funciona</span>
+        <h2>Da assinatura ao primeiro registro de evolução.</h2>
+        <p class="lead">Nossa equipe faz a implantação com você. Não precisa instalar nada: o Prumo roda no navegador do computador e do celular.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Escolha o plano</h3><p>Escolha o plano pelo número de obras e peça o teste de 14 dias pelo formulário. Não pedimos cartão.</p></div>
+        <div class="step"><h3>Cadastre a obra</h3><p>Envie o projeto do empreendimento (IFC, RVT, SKP ou DWG). O Prumo transforma o projeto na obra em 3D, e configuramos com você o orçamento e o cronograma.</p><span class="t">Envio do projeto <span class="soon">em breve</span></span></div>
+        <div class="step"><h3>Leve ao canteiro</h3><p>Engenheiro, mestre e almoxarife registram evolução, presença, EPIs e materiais pelo celular.</p></div>
+        <div class="step"><h3>Abra para o comprador</h3><p>Cada cliente recebe o acesso dele e passa a acompanhar a obra sem precisar ligar.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="planos" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <span class="k">Planos</span>
+        <h2>Uma mensalidade. Todos os recursos do plano.</h2>
+        <p class="lead">Pague por mês e cancele quando quiser. No plano anual, você economiza 15%. Usuários da construtora são ilimitados em todos os planos.</p>
+      </div>
+      <div class="billing" role="group" aria-label="Forma de cobrança">
+        <button type="button" id="bill-m" aria-pressed="true" data-bill="m">Mensal</button>
+        <button type="button" id="bill-a" aria-pressed="false" data-bill="a">Anual <em>−15%</em></button>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <h3>Canteiro</h3>
+          <p class="for">Para a construtora com uma obra em andamento.</p>
+          <div class="price"><span class="cur">R$</span><b data-m="690">690</b><span>/mês</span></div>
+          <p class="note" data-note>cobrado mensalmente</p>
+          <ul>
+            <li>1 obra ativa</li>
+            <li>Planta 3D e registro de evolução</li>
+            <li>Equipe, presença e EPIs</li>
+            <li>Materiais e pátio de máquinas</li>
+            <li>Cronograma e curva S</li>
+            <li>Portal essencial do comprador, até 50 unidades</li>
+            <li class="no">Gestão de lotes e unidades</li>
+          </ul>
+          <a class="btn" href="#contato" data-plan="Canteiro">Testar o Canteiro</a>
+        </article>
+        <article class="plan feat">
+          <span class="flag">Mais escolhido</span>
+          <h3>Construtora</h3>
+          <p class="for">Para quem toca várias obras e vende na planta.</p>
+          <div class="price"><span class="cur">R$</span><b data-m="1490">1.490</b><span>/mês</span></div>
+          <p class="note" data-note>cobrado mensalmente</p>
+          <ul>
+            <li>Até 5 obras ativas</li>
+            <li>Tudo do plano Canteiro</li>
+            <li>Portal completo do comprador, até 600 unidades</li>
+            <li>Gestão de lotes e unidades</li>
+            <li>Carteira de obras consolidada</li>
+            <li>Implantação acompanhada</li>
+            <li class="no">Marca própria no portal</li>
+          </ul>
+          <a class="btn primary" href="#contato" data-plan="Construtora">Testar o Construtora</a>
+        </article>
+        <article class="plan">
+          <h3>Incorporadora</h3>
+          <p class="for">Para incorporadoras com obras em várias cidades.</p>
+          <div class="price"><span class="cur">R$</span><b data-m="3900">3.900</b><span>/mês</span></div>
+          <p class="note" data-note>cobrado mensalmente</p>
+          <ul>
+            <li>Obras ilimitadas</li>
+            <li>Tudo do plano Construtora</li>
+            <li>Portal completo do comprador, sem limite de unidades</li>
+            <li>Marca própria no portal do comprador</li>
+            <li><span>Integração com ERP e financeiro <span class="soon">em breve</span></span></li>
+            <li><span>Gerente de conta dedicado <span class="soon">em breve</span></span></li>
+            <li><span>Suporte prioritário no mesmo dia <span class="soon">em breve</span></span></li>
+          </ul>
+          <a class="btn" href="#contato" data-plan="Incorporadora">Falar com vendas</a>
+        </article>
+      </div>
+      <p class="plans-foot">Itens marcados com <span class="soon" style="margin-left:0">em breve</span> ainda estão em desenvolvimento. Valores sem impostos. Obra ativa é a que ainda não teve o habite-se; obras entregues ficam no histórico sem custo.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Recurso</th><th>Canteiro</th><th>Construtora</th><th>Incorporadora</th></tr></thead>
+          <tbody>
+            <tr class="grp"><td colspan="4">Obra</td></tr>
+            <tr><td>Obras ativas</td><td class="mono">1</td><td class="mono">5</td><td class="mono">Ilimitadas</td></tr>
+            <tr><td>Planta 3D e registro de evolução</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+            <tr><td>Cronograma por etapa e curva S</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+            <tr><td>Materiais, estoque e pátio de máquinas</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+            <tr><td>Carteira de obras consolidada</td><td><span class="n">—</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+            <tr class="grp"><td colspan="4">Pessoas e segurança</td></tr>
+            <tr><td>Funcionários, presença, faltas e férias</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+            <tr><td>EPIs com CA, treinamentos NR-35 e exames</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+            <tr class="grp"><td colspan="4">Vendas e comprador</td></tr>
+            <tr><td>Lotes e unidades: disponível, reservado, vendido</td><td><span class="n">—</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+            <tr><td>Portal do comprador: obra em 3D e comunicados</td><td class="mono">50 unid.</td><td class="mono">600 unid.</td><td class="mono">Ilimitado</td></tr>
+            <tr><td>Portal completo: meu apê em 3D, passeio pelo apê, foto 360°, condomínio e bairro</td><td><span class="n">—</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+            <tr><td>Marca própria no portal</td><td><span class="n">—</span></td><td><span class="n">—</span></td><td><span class="y">✓</span></td></tr>
+            <tr class="grp"><td colspan="4">Integração</td></tr>
+            <tr><td>Integração com ERP e financeiro <span class="soon">em breve</span></td><td><span class="n">—</span></td><td><span class="n">—</span></td><td><span class="y">✓</span></td></tr>
+            <tr class="grp"><td colspan="4">Suporte</td></tr>
+            <tr><td>Suporte por chat e e-mail</td><td class="mono">Dias úteis</td><td class="mono">Dias úteis</td><td class="mono">Mesmo dia <span class="soon">em breve</span></td></tr>
+            <tr><td>Implantação</td><td class="mono">Guiada</td><td class="mono">Acompanhada</td><td class="mono">Dedicada</td></tr>
+            <tr><td>Gerente de conta dedicado <span class="soon">em breve</span></td><td><span class="n">—</span></td><td><span class="n">—</span></td><td><span class="y">✓</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="demo">
+        <div>
+          <span class="k">Demonstração ao vivo</span>
+          <h2 style="margin-top:12px;font-size:clamp(32px,4vw,46px)">Gire o Edifício Aurora em 3D.</h2>
+          <p>Abra a demonstração com dados fictícios. Troque entre a visão da construtora e a do comprador, veja a equipe no canteiro e a evolução por etapa.</p>
+        </div>
+        <a class="btn primary" href="demo/index.html">Abrir demonstração →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="perguntas" style="padding-top:0">
+    <div class="wrap faq-grid">
+      <div>
+        <span class="k" style="color:var(--terra-2)">Perguntas frequentes</span>
+        <h2 style="margin-top:18px">Antes de assinar.</h2>
+      </div>
+      <div class="faq">
+        <details open><summary>Existe fidelidade ou multa para cancelar?</summary><p>Não. A assinatura é mensal e sem fidelidade. No plano anual, o desconto de 15% vale para pagamento à vista. As regras de cobrança e cancelamento serão descritas no contrato antes do início da assinatura.</p></details>
+        <details><summary>Preciso instalar algum programa?</summary><p>Não. O Prumo funciona no navegador do computador, do tablet e do celular. O mestre de obras registra a evolução direto do canteiro.</p></details>
+        <details><summary>Como a obra vira 3D?</summary><p>Você envia o projeto que já tem, em IFC, RVT, SKP ou DWG, e o Prumo transforma esse modelo na evolução da obra. Não é preciso modelar nada de novo: cada etapa registrada no canteiro atualiza o 3D automaticamente. O envio e a conversão do projeto ainda estão em desenvolvimento; até lá, a demonstração usa modelos de exemplo.</p></details>
+        <details><summary>O comprador paga alguma coisa?</summary><p>Não. O acesso do comprador está incluído em todos os planos. No Canteiro, o portal essencial mostra a obra em 3D e os comunicados da construtora para até 50 unidades. Nos planos Construtora e Incorporadora, o portal completo inclui também o apartamento em 3D, o passeio pelo apê, o condomínio e o bairro. O comprador vê só a própria unidade e as áreas comuns.</p></details>
+        <details><summary>Posso trocar de plano depois?</summary><p>Sim. Se o número de obras mudar, você troca para o plano que fizer sentido. Como a diferença de valor é cobrada será descrito no contrato antes do início da assinatura.</p></details>
+        <details><summary>Meus dados ficam seguros?</summary><p>O acesso é por perfil: o comprador nunca vê custos, salários ou dados de outras unidades. Onde os dados ficam hospedados, a rotina de backup e o tratamento de dados pessoais conforme a LGPD estão sendo definidos e serão descritos no contrato antes de você colocar dados reais no Prumo.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contato" style="padding-top:0">
+    <div class="wrap contact">
+      <div>
+        <span class="k" style="color:var(--terra-2)">Teste grátis</span>
+        <h2 style="margin-top:18px">Coloque sua próxima laje no Prumo.</h2>
+        <p class="lead">Preencha os dados e a nossa equipe entra em contato para apresentar o Prumo e combinar o teste com você.</p>
+        <ul>
+          <li>14 dias de teste, sem compromisso</li>
+          <li>Sem cartão de crédito</li>
+          <li>Ajuda para cadastrar a primeira obra</li>
+        </ul>
+      </div>
+      <form id="lead" novalidate>
+        <label>Seu nome<input id="f-nome" name="nome" autocomplete="name" required></label>
+        <label>Construtora<input id="f-empresa" name="empresa" autocomplete="organization" required></label>
+        <label>E-mail profissional<input id="f-email" name="email" type="email" autocomplete="email" required></label>
+        <label>WhatsApp<input id="f-tel" name="tel" type="tel" autocomplete="tel" placeholder="(11) 90000-0000"></label>
+        <label>Obras em andamento
+          <select id="f-obras" name="obras">
+            <option>1 obra</option><option selected>2 a 5 obras</option><option>6 a 15 obras</option><option>Mais de 15 obras</option>
+          </select>
+        </label>
+        <label>Plano de interesse
+          <select id="f-plano" name="plano">
+            <option>Canteiro</option><option selected>Construtora</option><option>Incorporadora</option>
+          </select>
+        </label>
+        <label class="hp" aria-hidden="true">Não preencha<input name="site" tabindex="-1" autocomplete="off"></label>
+        <button class="btn primary full" type="submit">Quero testar o Prumo</button>
+        <p class="form-note full">Usamos estes dados só para falar com você sobre o teste do Prumo.</p>
+        <div class="form-ok" id="formOk" role="status" hidden></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Prumo, início">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2v15"/><path d="M10 17h12l-6 13z" class="fill"/><circle cx="16" cy="3" r="1.6" class="fill"/></svg>
+      <b>Prumo</b>
+    </a>
+    <span>Gestão de obras para construtoras · © 2026</span>
+    <nav aria-label="Rodapé">
+      <a href="#modulos">Módulos</a><a href="#planos">Planos</a><a href="#perguntas">Perguntas</a><a href="#contato">Contato</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
