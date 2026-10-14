@@ -1,0 +1,8 @@
+[
+  { "title": "Unidade vendida · Edifício Aurora", "message": "Apê 1204 vendido para Mariana C. por R$ 612.000. Contrato enviado para assinatura.", "tags": ["house", "tada"], "priority": 4, "click": "https://rafagrillo6026-source.github.io/prumo-site/demo/index.html" },
+  { "title": "Nova reserva · Reserva das Águas", "message": "Lote 18 (380 m²) reservado por 72 h. Proposta de R$ 214 mil aguardando análise do comercial.", "tags": ["pushpin"], "priority": 3, "click": "https://rafagrillo6026-source.github.io/prumo-site/demo/index.html#condominio" },
+  { "title": "Pedido de compra aprovado", "message": "120 sacos de cimento CP-II e 2 t de aço CA-50 para o Edifício Aurora. Total R$ 18.430. Entrega prevista: sexta-feira.", "tags": ["white_check_mark", "truck"], "priority": 3 },
+  { "title": "Estoque baixo · Residencial Mirante", "message": "Bloco cerâmico dura só mais 4 dias no ritmo atual. Sugestão de compra: 6.000 unidades.", "tags": ["warning"], "priority": 4 },
+  { "title": "Reserva vencendo hoje", "message": "Lote 07 da Reserva das Águas: a reserva de Carlos M. vence às 18h. Ligue antes de liberar o lote.", "tags": ["hourglass_flowing_sand"], "priority": 4 },
+  { "title": "Pagamento recebido", "message": "Entrada de R$ 45.000 do apê 803 (Edifício Aurora) confirmada pelo financeiro.", "tags": ["moneybag"], "priority": 3 }
+]

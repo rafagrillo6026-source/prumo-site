@@ -1,0 +1,27 @@
+name: Notificações de teste (ntfy)
+
+# Dispara de dois jeitos:
+# 1) Actions → "Notificações de teste (ntfy)" → Run workflow
+# 2) qualquer alteração no arquivo notificacoes/disparar.txt
+on:
+  workflow_dispatch:
+  push:
+    paths: ["notificacoes/disparar.txt"]
+
+env:
+  NTFY_TOPIC: prumo-rafael-c3e1b1a5
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enviar notificações fictícias de compra e venda
+        run: |
+          n=$(jq length notificacoes/teste.json)
+          for i in $(seq 0 $((n-1))); do
+            jq -c --arg t "$NTFY_TOPIC" ".[$i] + {topic: \$t}" notificacoes/teste.json \
+              | curl -sS -f -H "Content-Type: application/json" -d @- https://ntfy.sh/ -o /dev/null
+            echo "enviada $((i+1)) de $n"
+            sleep 6
+          done
