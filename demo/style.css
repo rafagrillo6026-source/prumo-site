@@ -1,22 +1,22 @@
 /* Layout: vitrine de maquete — viewport 3D grande à esquerda, painel de informação à direita.
    Celular: viewport no topo, painel rolando abaixo. Visual único escuro (grafite + terracota). */
 :root {
-  --bg: #0D0F12;
-  --panel: #14171C;
-  --panel-2: #1A1E25;
-  --line: #2A2F39;
-  --ink: #EDEBE7;
-  --dim: #9BA1AB;
-  --faint: #626874;
-  --terra: #C55A3D;
-  --terra-2: #E2805C;
-  --gold: #E6B85C;
-  --cyan: #5CC9EA;
-  --green: #4DC48C;
-  --red: #F06262;
-  --display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
-  --body: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
-  --mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+  --bg: #100E0C;
+  --panel: #15120F;
+  --panel-2: #1D1915;
+  --line: #2E2A26;
+  --ink: #F1EAE0;
+  --dim: #A8A097;
+  --faint: #7A7268;
+  --terra: #B4552F;
+  --terra-2: #E39A74;
+  --gold: #E8C27A;
+  --cyan: #9FC8EE;
+  --green: #7ED6A8;
+  --red: #F08A7A;
+  --display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --body: "Plus Jakarta Sans", -apple-system, "Segoe UI", sans-serif;
+  --mono: "Plus Jakarta Sans", -apple-system, "Segoe UI", sans-serif;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -316,3 +316,22 @@ button { cursor: pointer; }
   #gl { touch-action: pan-y !important; }
   .viewport { height: 50vh; min-height: 300px; }
 }
+
+/* ---------- Estilo holográfico (mesmo visual da página da Prumo) ---------- */
+.brand b { font-family: var(--display); font-weight: 400; font-size: 28px; letter-spacing: .02em; text-transform: none; }
+.panel h1 { font-weight: 400; font-size: 38px; line-height: 1.02; text-transform: none; letter-spacing: -.005em; }
+.panel h2 { font-weight: 400; font-size: 24px; text-transform: none; letter-spacing: 0; }
+.obra-card h3 { font-weight: 400; font-size: 24px; text-transform: none; letter-spacing: 0; }
+.vp-hud b, .big-stat .v, .obra-card .pct { font-weight: 400; letter-spacing: 0; }
+.k { font-family: var(--body); font-weight: 500; letter-spacing: .14em; }
+.viewport { background-color: #100E0C; background-image:
+  radial-gradient(ellipse 55% 45% at 4% 0%, rgba(255, 170, 90, .22), transparent 70%),
+  radial-gradient(ellipse 60% 55% at 50% 62%, rgba(120, 175, 230, .16), transparent 72%),
+  linear-gradient(180deg, #16120F 0%, #0C0A09 100%); }
+@media (pointer: fine) { #gl { filter: drop-shadow(0 0 2px rgba(170, 215, 255, .45)) drop-shadow(0 0 10px rgba(120, 180, 240, .25)); } }
+.lbl { background: rgba(16, 14, 12, .72); border-color: rgba(159, 200, 238, .35); color: var(--ink); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.lbl.room { background: rgba(16, 14, 12, .6); }
+.vp-hud span, .vp-hint { color: var(--cyan); }
+.top, .tabs, .demo-flag { background: var(--bg); }
+.voltar { border-radius: 999px; }
+@media (max-width: 640px) { .lbl.room small { display: none; } .lbl.room { padding: 3px 7px; font-size: 11px; } }

@@ -214,6 +214,7 @@
   const T = window.THREE;
   if (!T) { $("#loading").textContent = "Não foi possível carregar o 3D neste navegador."; return; }
   // Modo leve para celular e tablet: menos pixels, sombras menores e 30 quadros por segundo.
+  const TELA_PEQUENA = () => innerWidth < 640; // no celular, menos etiquetas sobre a planta
   const LEVE = matchMedia("(pointer: coarse)").matches || Math.min(screen.width, screen.height) < 768;
   const SOMBRA = LEVE ? 1024 : 2048;
   const renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: LEVE ? "low-power" : "high-performance" });
@@ -221,7 +222,7 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, LEVE ? 1.5 : 2));
   renderer.outputEncoding = T.sRGBEncoding;
   renderer.toneMapping = T.ACESFilmicToneMapping;
-  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.enabled = false; // estilo holográfico: sem sombras
   renderer.shadowMap.type = LEVE ? T.PCFShadowMap : T.PCFSoftShadowMap;
   // Se o celular derrubar o 3D por falta de memória, avisa em vez de congelar a tela.
   canvas.addEventListener("webglcontextlost", (e) => { e.preventDefault(); const m = document.createElement("button"); m.className = "gl-perdido mono"; m.type = "button"; m.textContent = "O celular pausou o 3D para economizar memória. Toque para recarregar."; m.onclick = () => location.reload(); vp.appendChild(m); });
@@ -1266,7 +1267,7 @@
     { nome: "Adulta", altura: 1.70, pele: 0x6a4128, cabelo: 0x140e0b, camisa: 0x4f7d5c, calca: 0x4f7d5c, fem: true, vestido: true, crespo: true, pose: "pe", x: 1.25, z: -1.45, rot: Math.PI + 0.3 },
   ].forEach((c) => {
     const p = pessoa(c); p.g.position.set(c.x, 0.04, c.z); p.g.rotation.y = c.rot; PG.add(p.g);
-    p.lbl = label(apto, `${c.nome} · ${fmtM(c.altura)} m`, new T.Vector3(), "cyan", () => ui.pessoas && ui.apMode === "planta");
+    p.lbl = label(apto, `${c.nome} · ${fmtM(c.altura)} m`, new T.Vector3(), "cyan", () => ui.pessoas && ui.apMode === "planta" && !TELA_PEQUENA());
     AP.pessoas.push(p);
   });
   AP.dog = cachorro(PG, 1.25, 3.55, 1.1);
@@ -1596,15 +1597,99 @@
   }
   function tamanho() { const w = vp.clientWidth, h = vp.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); Object.values(cenas).forEach((c) => { c.camera.aspect = w / h; c.camera.updateProjectionMatrix(); }); }
   new ResizeObserver(tamanho).observe(vp);
+
+  // ---------- Estilo holográfico ----------
+  // Converte tudo o que está nas cenas em linhas de luz (mesmo visual da página da Prumo).
+  // Roda de tempos em tempos e pega também o que aparece depois: lajes novas, móveis carregados, pinos, figuras.
+  const HOLO = { base: new T.Color(0xd6ecff), linhas: new Map(), arestas: new Map(), hsl: {} };
+  const corHolo = (m) => {
+    const c = m && m.color ? m.color : null; if (!c) return HOLO.base;
+    c.getHSL(HOLO.hsl); const { h, s, l } = HOLO.hsl;
+    // cores de significado (meu apê, situação do lote, rotas) viram tons de luz da mesma família; o resto fica azul-gelo
+    if (s > 0.42 && l > 0.12 && l < 0.92 && !(h > 0.17 && h < 0.47)) return new T.Color().setHSL(h, 0.8, 0.7);
+    return HOLO.base;
+  };
+  const matLinha = (cor, m) => {
+    const k = cor.getHexString() + (m.clippingPlanes ? m.clippingPlanes.map((p) => p.uuid || p.constant).join() : "");
+    let lm = HOLO.linhas.get(k);
+    if (!lm || (m.clippingPlanes && lm.clippingPlanes !== m.clippingPlanes)) {
+      lm = new T.LineBasicMaterial({ color: cor, transparent: true, opacity: cor === HOLO.base ? 0.36 : 0.8, blending: T.AdditiveBlending, depthWrite: false, toneMapped: false });
+      if (m.clippingPlanes) { lm.clippingPlanes = m.clippingPlanes; lm.clipIntersection = !!m.clipIntersection; }
+      HOLO.linhas.set(k, lm);
+    }
+    return lm;
+  };
+  const semRaio = () => {};
+  let limiteGrande = 45;
+  function holografar(o) {
+    if ((o.isLine || o.isPoints) && !o.userData.holoIgnorar && !o.userData.holoVisto) {
+      // grades e linhas antigas gigantes (piso infinito) saem; as demais (rotas, cotas) ficam
+      o.userData.holoVisto = true; const g = o.geometry; if (g) { if (!g.boundingSphere) g.computeBoundingSphere(); if (g.boundingSphere.radius > limiteGrande) o.userData.holoGrande = true; }
+    }
+    if (o.userData.holoGrande) { o.visible = false; return; }
+    if (!o.isMesh) return;
+    if (o.userData.holoGrande) { o.visible = false; return; } // o app pode religar o chão: desliga de novo
+    if (o.userData.holoIgnorar) return;
+    const h = o.userData.holo;
+    if (h && o.material === h.fill) {
+      // a cor original mudou (ex.: lote vendido)? acompanha
+      const hex = h.orig && h.orig.color ? h.orig.color.getHex() : -1;
+      if (hex !== h.hex) { h.hex = hex; const c = corHolo(h.orig); h.fill.color.copy(c); if (h.linha) h.linha.material = matLinha(c, h.orig); }
+      return;
+    }
+    const orig = Array.isArray(o.material) ? o.material[0] : o.material;
+    const g = o.geometry; if (!g) return;
+    if (!g.boundingSphere) g.computeBoundingSphere();
+    o.getWorldScale(v3h);
+    const raio = g.boundingSphere.radius * Math.max(v3h.x, v3h.y, v3h.z);
+    if (raio > limiteGrande) { o.userData.holoGrande = true; o.visible = false; return; } // céu, chão distante, grades gigantes
+    const cor = corHolo(orig), pele = o.isSkinnedMesh;
+    const fill = new T.MeshBasicMaterial({ color: cor, transparent: true, opacity: pele ? 0.22 : (orig && orig.transparent && orig.opacity < 0.6 ? 0.018 : 0.03), blending: T.AdditiveBlending, depthWrite: false, side: T.DoubleSide, toneMapped: false });
+    if (orig && orig.clippingPlanes) { fill.clippingPlanes = orig.clippingPlanes; fill.clipIntersection = !!orig.clipIntersection; }
+    if (orig && (orig.visible === false || (orig.transparent && orig.opacity < 0.04))) fill.visible = false;
+    if (LEVE && !pele) fill.opacity *= 0.6;
+    o.material = fill; o.castShadow = false; o.receiveShadow = false;
+    const reg = { fill, orig, hex: orig && orig.color ? orig.color.getHex() : -1, linha: h && h.linha };
+    // contorno de luz (arestas): não vale para figuras animadas, instâncias e modelos muito pesados
+    const tris = (g.index ? g.index.count : g.attributes.position.count) / 3;
+    if (!pele && !o.isInstancedMesh && tris < 16000) {
+      if (reg.linha) reg.linha.material = matLinha(cor, fill);
+      else {
+        let eg = HOLO.arestas.get(g.uuid); if (!eg) { eg = new T.EdgesGeometry(g, 28); HOLO.arestas.set(g.uuid, eg); }
+        const l = new T.LineSegments(eg, matLinha(cor, fill)); l.raycast = semRaio; l.userData.holoIgnorar = true; o.add(l); reg.linha = l;
+      }
+    }
+    o.userData.holo = reg;
+  }
+  const v3h = new T.Vector3();
+  function holoPasse(c) {
+    if (!c || c.nome === "pano") return;
+    const sc = c.scene; sc.background = null; sc.fog = null; sc.environment = null;
+    if (!c.holoGrade) {
+      c.holoGrade = true;
+      const tam = c.nome === "bairro" ? 240 : 120, gr = new T.GridHelper(tam, tam / 2, 0x6f9fc8, 0x6f9fc8);
+      gr.material.transparent = true; gr.material.opacity = 0.09; gr.material.blending = T.AdditiveBlending; gr.material.depthWrite = false;
+      gr.position.y = c.nome === "apto" ? -0.26 : 0.01; gr.userData.holoIgnorar = true; gr.raycast = semRaio; sc.add(gr);
+      const cv = document.createElement("canvas"); cv.width = cv.height = 128; const cx = cv.getContext("2d"), rg = cx.createRadialGradient(64, 64, 0, 64, 64, 64);
+      rg.addColorStop(0, "rgba(140,195,245,.35)"); rg.addColorStop(1, "rgba(140,195,245,0)"); cx.fillStyle = rg; cx.fillRect(0, 0, 128, 128);
+      const lado = c.nome === "apto" ? 16 : tam * 0.35, brilho = new T.Mesh(new T.PlaneGeometry(lado, lado), new T.MeshBasicMaterial({ map: new T.CanvasTexture(cv), transparent: true, blending: T.AdditiveBlending, depthWrite: false, toneMapped: false }));
+      brilho.rotation.x = -Math.PI / 2; brilho.position.y = gr.position.y + 0.005; brilho.userData.holoIgnorar = true; brilho.raycast = semRaio; sc.add(brilho);
+    }
+    limiteGrande = c.nome === "apto" ? 20 : 45;
+    sc.traverse(holografar);
+  }
+  let holoUltimo = 0;
   const v3 = new T.Vector3(); let ultimo = performance.now();
   function laco(agora) {
     if (LEVE && agora - ultimo < 30) { requestAnimationFrame(laco); return; } // 30 quadros por segundo no celular
     const dt = Math.min(0.05, (agora - ultimo) / 1000); ultimo = agora; relogio += dt;
     if (ativa) {
+      if (agora - holoUltimo > 350 || ativa.holoNome !== ativa.nome) { holoUltimo = agora; ativa.holoNome = ativa.nome; holoPasse(ativa); }
+      if (ativa.nome !== "pano") ativa.scene.background = null; // o céu é religado pelo dia/noite: aqui fica sempre a mesa escura
       ativa.tick && ativa.tick(dt);
       if (ativa.camAnim) { const k = Math.min(1, dt * 2.6); ativa.camera.position.lerp(ativa.camAnim.pos, k); ativa.controls.target.lerp(ativa.camAnim.alvo, k); if (ativa.camera.position.distanceTo(ativa.camAnim.pos) < 0.05 && ativa.controls.target.distanceTo(ativa.camAnim.alvo) < 0.05) ativa.camAnim = null; }
       else if (ativa.alvoAnim) { ativa.controls.target.lerp(ativa.alvoAnim, Math.min(1, dt * 3)); if (ativa.controls.target.distanceTo(ativa.alvoAnim) < 0.02) ativa.alvoAnim = null; }
-      ativa.controls.update(); renderer.toneMappingExposure = ativa.exposicao ?? 1; renderer.render(ativa.scene, ativa.camera);
+      ativa.controls.update(); renderer.toneMappingExposure = ativa.nome === "pano" ? (ativa.exposicao ?? 1) : 1; renderer.render(ativa.scene, ativa.camera);
       const w = vp.clientWidth, h = vp.clientHeight;
       ativa.labels.forEach((l) => { v3.copy(l.pos).project(ativa.camera); const vis = l.show() && v3.z < 1 && Math.abs(v3.x) < 1.1 && Math.abs(v3.y) < 1.1; l.el.style.display = vis ? "" : "none"; if (vis) l.el.style.transform = `translate(${((v3.x + 1) / 2) * w}px, ${((1 - v3.y) / 2) * h}px) translate(-50%, ${l.el.classList.contains("room") ? "-50%" : "-100%"})`; });
     }
