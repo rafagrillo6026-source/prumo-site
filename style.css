@@ -234,9 +234,10 @@ form button[disabled] { opacity: .6; cursor: progress; }
 .abas button[aria-selected="true"] { background: var(--sobre-escuro); color: #100E0C; }
 .fechar { margin-left: auto; flex: none; width: 38px; height: 38px; border: 1px solid var(--linha-escuro); border-radius: 999px; background: transparent; color: inherit; font-size: 22px; line-height: 1; cursor: pointer; }
 .fechar:hover { border-color: var(--sobre-escuro); }
-.janela-tela { position: relative; flex: 1; min-height: 0; height: min(68vh, 640px); margin: 0 18px; }
+.janela-tela { position: relative; flex: 1 1 auto; min-height: 260px; height: min(68vh, 640px); margin: 0 18px; }
 .janela-tela canvas { display: block; width: 100%; height: 100%; -webkit-mask-image: radial-gradient(ellipse 75% 72% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 75% 72% at 50% 50%, #000 62%, transparent 100%); filter: drop-shadow(0 0 3px rgba(170, 215, 255, .55)) drop-shadow(0 0 14px rgba(120, 180, 240, .35)); }
-.janela-info { margin: 0; }
+.janela-info { margin: 0; left: 4px; bottom: 12px; }
+.janela-tela .holo-repetir { right: 4px; bottom: 8px; }
 .janela-pe p { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim-escuro); }
 .janela-pe .pill { margin-left: auto; }
 .janela-pe .pill:hover { background: var(--sobre-escuro); border-color: var(--sobre-escuro); color: var(--escuro); }
@@ -244,12 +245,12 @@ form button[disabled] { opacity: .6; cursor: progress; }
 @media (max-width: 560px) {
   .janela-cab, .janela-pe { padding: 12px; }
   .abas button { padding: 8px 11px; font-size: 10px; letter-spacing: .08em; }
-  .janela-tela { margin: 0 8px; height: 62vh; }
+  .janela-tela { margin: 0 8px; height: 62vh; min-height: 240px; }
   .janela-pe { flex-direction: column; align-items: stretch; gap: 10px; }
   .janela-pe p { text-align: center; }
   .janela-pe .pill { margin-left: 0; }
   .janela-tela canvas { filter: drop-shadow(0 0 4px rgba(150, 205, 255, .5)); }
-  .janela-info { top: 0; bottom: auto; }
+  .janela-info { top: 8; bottom: auto; }
 }
 
 /* ---------- Entrada suave ao rolar ---------- */
