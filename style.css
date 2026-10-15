@@ -16,6 +16,7 @@
   --sobre-escuro: #F1EAE0;
   --dim-escuro: #A8A097;
   --linha-escuro: #34312D;
+  --sobre-terra: #FFFFFF;
   --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
   --sans: "Plus Jakarta Sans", -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
@@ -23,19 +24,19 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #121110; --bg-2: #1A1816; --pessego: #241B16; --ink: #EEE7DD; --dim: #B0A79C; --fraco: #847C72;
-    --linha: #2E2A26; --terra: #E08A62; --terra-2: #EBA07D; --escuro: #0B0A09; --linha-escuro: #2A2724;
+    --linha: #2E2A26; --terra: #E08A62; --terra-2: #EBA07D; --escuro: #0B0A09; --linha-escuro: #2A2724; --sobre-terra: #1A120D;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #121110; --bg-2: #1A1816; --pessego: #241B16; --ink: #EEE7DD; --dim: #B0A79C; --fraco: #847C72;
-  --linha: #2E2A26; --terra: #E08A62; --terra-2: #EBA07D; --escuro: #0B0A09; --linha-escuro: #2A2724;
+  --linha: #2E2A26; --terra: #E08A62; --terra-2: #EBA07D; --escuro: #0B0A09; --linha-escuro: #2A2724; --sobre-terra: #1A120D;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { margin: 0; background: var(--bg); color: var(--ink); transition: background-color .35s, color .35s; font-family: var(--sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 a { color: inherit; }
 button, input, select { font: inherit; color: inherit; }
 img, svg, video { display: block; max-width: 100%; }
@@ -57,7 +58,7 @@ h3 { font-size: 28px; line-height: 1.1; }
 .pill { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 26px; border: 1px solid currentColor; border-radius: 999px; background: transparent; font-size: 12.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; cursor: pointer; white-space: nowrap; transition: background .25s, color .25s, border-color .25s; }
 .pill:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 .pill svg { width: 12px; height: 12px; fill: currentColor; }
-.pill-cheio { background: var(--terra); border-color: var(--terra); color: #fff; }
+.pill-cheio { background: var(--terra); border-color: var(--terra); color: var(--sobre-terra); }
 .pill-cheio:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 .pill-sm { min-height: 38px; padding: 0 18px; font-size: 11px; }
 .acoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
@@ -69,13 +70,23 @@ h3 { font-size: 28px; line-height: 1.1; }
 .top.rolou { background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--linha); }
 .top-in { display: flex; align-items: center; gap: 40px; height: 76px; }
 .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.marca svg { width: 18px; height: 24px; fill: none; stroke: var(--terra); stroke-width: 1.5; stroke-linecap: round; }
+.marca svg { flex: none; width: 18px; height: 24px; fill: none; stroke: var(--terra); stroke-width: 1.5; stroke-linecap: round; }
 .marca .cheio { fill: var(--terra); stroke: none; }
 .marca span { font-family: var(--serif); font-size: 28px; line-height: 1; letter-spacing: .02em; }
 .menu { display: flex; gap: 32px; margin-left: auto; }
 .menu a { font-size: 11.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: var(--dim); transition: color .2s; }
 .menu a:hover { color: var(--ink); }
-@media (max-width: 900px) { .menu { display: none; } .top .pill { margin-left: auto; } }
+/* botão de tema claro / escuro */
+.tema { flex: none; display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px 0 12px; border: 1px solid var(--linha); border-radius: 999px; background: transparent; color: var(--dim); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: color .2s, border-color .2s, background .2s; }
+.tema:hover { color: var(--ink); border-color: var(--ink); }
+.tema svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.tema .ic-sol { display: none; }
+.escuro .tema .ic-sol { display: block; }
+.escuro .tema .ic-lua { display: none; }
+@media (max-width: 900px) { .menu { display: none; } .tema { margin-left: auto; } }
+@media (max-width: 560px) { .tema { width: 38px; padding: 0; justify-content: center; } .tema span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } }
+@media (max-width: 560px) { .top-in { gap: 10px; } .top .pill-sm { padding: 0 14px; font-size: 10.5px; letter-spacing: .08em; } }
+@media (max-width: 360px) { .marca span { font-size: 24px; } .top .pill-sm { padding: 0 11px; } }
 
 /* ---------- Abertura ---------- */
 .hero { padding: clamp(40px, 8vh, 96px) 0 clamp(72px, 12vh, 140px); }
@@ -170,7 +181,7 @@ h3 { font-size: 28px; line-height: 1.1; }
 .cartoes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .plano { position: relative; display: flex; flex-direction: column; padding: 40px 34px 34px; border: 1px solid var(--linha); border-radius: 4px; background: var(--bg); }
 .plano.destaque { border-color: var(--terra); }
-.selo { position: absolute; top: -12px; left: 34px; padding: 4px 12px; border-radius: 999px; background: var(--terra); color: #fff; font-size: 10.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
+.selo { position: absolute; top: -12px; left: 34px; padding: 4px 12px; border-radius: 999px; background: var(--terra); color: var(--sobre-terra); font-size: 10.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
 .plano h3 { font-size: 34px; }
 .para { margin-top: 8px; color: var(--dim); font-size: 15px; min-height: 3.2em; }
 .preco { display: flex; align-items: baseline; gap: 6px; margin-top: 22px; }

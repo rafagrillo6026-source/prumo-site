@@ -19,6 +19,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="style.css">
+<script>
+  // aplica o tema escolhido antes de desenhar a página (evita piscar no tema errado)
+  try { var t = localStorage.getItem("prumo-tema"); if (t === "claro" || t === "escuro") document.documentElement.dataset.theme = t === "claro" ? "light" : "dark"; } catch (e) {}
+</script>
 </head>
 <body>
 
@@ -34,6 +38,11 @@
       <a href="#planos">Planos</a>
       <a href="#contato">Contato</a>
     </nav>
+    <button class="tema" type="button" id="tema" aria-label="Mudar para o tema escuro">
+      <svg class="ic-lua" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="ic-sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      <span id="temaTxt">Tema escuro</span>
+    </button>
     <button class="pill pill-sm" type="button" data-video>Ver a obra em 3D</button>
   </div>
 </header>

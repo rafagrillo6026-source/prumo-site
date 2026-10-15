@@ -4,6 +4,27 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // ---------- Tema claro / escuro ----------
+  // Sem escolha salva, segue o tema do aparelho. O botão grava a escolha da pessoa.
+  const raiz = document.documentElement, sistemaEscuro = matchMedia("(prefers-color-scheme: dark)");
+  const botaoTema = $("#tema"), textoTema = $("#temaTxt");
+  const temaAtual = () => raiz.dataset.theme ? raiz.dataset.theme === "dark" : sistemaEscuro.matches;
+  const marcarTema = () => {
+    const escuro = temaAtual();
+    raiz.classList.toggle("escuro", escuro);
+    const alvo = escuro ? "Tema claro" : "Tema escuro";
+    textoTema.textContent = alvo; botaoTema.setAttribute("aria-label", `Mudar para o ${alvo.toLowerCase()}`);
+    $$('meta[name="theme-color"]').forEach((m) => { m.content = escuro ? "#121110" : "#F6F1EA"; m.removeAttribute("media"); });
+  };
+  botaoTema.addEventListener("click", () => {
+    const escuro = !temaAtual();
+    raiz.dataset.theme = escuro ? "dark" : "light";
+    try { localStorage.setItem("prumo-tema", escuro ? "escuro" : "claro"); } catch (e) {}
+    marcarTema();
+  });
+  sistemaEscuro.addEventListener("change", () => { if (!raiz.dataset.theme) marcarTema(); });
+  marcarTema();
+
   // ---------- Topo ganha fundo ao rolar ----------
   const topo = $("#topo");
   const marcarTopo = () => topo.classList.toggle("rolou", scrollY > 12);
