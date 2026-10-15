@@ -118,29 +118,10 @@
   <!-- ---------- Demonstração ---------- -->
   <section class="demo" id="demo">
     <div class="wrap demo-grade">
-      <figure class="desenho revela" aria-hidden="true">
-        <svg viewBox="0 0 520 440" class="traco">
-          <!-- chão -->
-          <path d="M20 410h480"/>
-          <!-- grua -->
-          <path d="M392 410V70M384 410V70M384 70h8M330 70h170M392 70l-62 0M392 70l-62 22M392 70l108 0M392 70l108 18M470 70v40"/>
-          <path d="M392 58l-8 12h8zM392 58v-14"/>
-          <path class="terra" d="M470 110v58"/>
-          <path class="terra cheio" d="M462 168h16v12h-16z"/>
-          <!-- prédio pronto -->
-          <path d="M120 410V170h200v240"/>
-          <path d="M120 230h200M120 290h200M120 350h200"/>
-          <path d="M140 185h30v30h-30zM185 185h30v30h-30zM230 185h30v30h-30zM275 185h30v30h-30z"/>
-          <path d="M140 245h30v30h-30zM185 245h30v30h-30zM230 245h30v30h-30zM275 245h30v30h-30z"/>
-          <path d="M140 305h30v30h-30zM185 305h30v30h-30zM230 305h30v30h-30zM275 305h30v30h-30z"/>
-          <path d="M195 410v-45h50v45"/>
-          <!-- pavimentos subindo (tracejado) -->
-          <path class="tracejado" d="M120 170v-60h200v60M120 140h200M160 110v60M200 110v60M240 110v60M280 110v60"/>
-          <!-- fio de prumo -->
-          <path class="terra" d="M100 40v300"/>
-          <path class="terra cheio" d="M92 340h16l-8 22z"/>
-          <circle class="terra" cx="100" cy="36" r="4"/>
-        </svg>
+      <figure class="holo revela" id="holo" aria-label="Maquete holográfica de uma torre subindo andar por andar sobre a prancha do projeto">
+        <canvas id="holoTela"></canvas>
+        <figcaption class="holo-info" aria-hidden="true"><span id="holoLaje">Laje 00</span><span>de 68</span></figcaption>
+        <button class="holo-repetir" type="button" id="holoRepetir" hidden>Ver subir de novo</button>
       </figure>
       <div class="demo-texto">
         <p class="chamada revela">Veja funcionando</p>
