@@ -10,7 +10,7 @@
 <meta property="og:site_name" content="Prumo">
 <meta property="og:title" content="Prumo · Obra em dia, cliente por dentro">
 <meta property="og:description" content="Gestão de obras com a obra em 3D e portal do comprador. Teste grátis por 14 dias, sem cartão.">
-<meta property="og:image" content="https://rafagrillo6026-source.github.io/prumo-site/assets/demo-hero.jpg">
+<meta property="og:image" content="https://rafagrillo6026-source.github.io/prumo-site/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F6F1EA" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)">
@@ -54,7 +54,6 @@
           <p>A Prumo junta cronograma, custo, equipe, materiais e segurança da sua obra num lugar só. E o seu comprador acompanha o apartamento dele subindo, em 3D.</p>
           <div class="acoes">
             <button class="pill pill-cheio" type="button" data-video>
-              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5v9l7-4.5z"/></svg>
               Ver a obra em 3D
             </button>
             <a class="pill" href="#sobre">Conhecer a Prumo</a>
@@ -126,12 +125,9 @@
       <div class="demo-texto">
         <p class="chamada revela">Veja funcionando</p>
         <h2 class="revela">A obra subindo. O apartamento por dentro.</h2>
-        <p class="revela">Assista à obra crescendo etapa por etapa e a um passeio pela sala do apartamento, de dia e de noite. Ou abra a demonstração e explore você mesmo: troque entre a visão da construtora e a do comprador.</p>
+        <p class="revela">Cada laje registrada no canteiro sobe no 3D. E quem comprou vê o próprio apartamento por dentro, com cômodos, medidas e móveis em escala. Abra a demonstração e explore: troque entre a visão da construtora e a do comprador.</p>
         <div class="acoes revela">
-          <button class="pill pill-cheio" type="button" data-video>
-            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5v9l7-4.5z"/></svg>
-            Assistir ao vídeo
-          </button>
+          <button class="pill pill-cheio" type="button" data-video="apto">Ver o apartamento em 3D</button>
           <a class="pill" href="demo/index.html">Abrir a demonstração 3D</a>
         </div>
         <a class="link-linha revela" href="demo/index.html#condominio">Ver o condomínio Reserva das Águas</a>
@@ -252,17 +248,23 @@
   </div>
 </footer>
 
-<!-- ---------- Vídeo da demonstração (abre pelo botão) ---------- -->
-<dialog class="janela" id="janela" aria-label="Vídeo da demonstração">
+<!-- ---------- Maquete 3D em janela (abre pelo botão "Ver a obra em 3D") ---------- -->
+<dialog class="janela" id="janela" aria-label="Maquete 3D da obra e do apartamento">
   <div class="janela-cab">
-    <span class="rotulo" id="legenda">Obra crescendo por etapa</span>
-    <button class="fechar" type="button" data-fechar aria-label="Fechar vídeo">×</button>
+    <div class="abas" role="tablist" aria-label="Escolher vista">
+      <button type="button" role="tab" data-vista="torre" aria-selected="true">A obra subindo</button>
+      <button type="button" role="tab" data-vista="apto" aria-selected="false">O apartamento</button>
+    </div>
+    <button class="fechar" type="button" data-fechar aria-label="Fechar">×</button>
   </div>
-  <video id="filme" src="assets/demo-hero.mp4" poster="assets/demo-hero.jpg" muted playsinline loop preload="none" width="960" height="720"
-    aria-label="O Edifício Aurora cresce etapa por etapa em 3D e depois a câmera passeia pela sala do apartamento, de dia e de noite."></video>
+  <div class="janela-tela">
+    <canvas id="janelaTela"></canvas>
+    <p class="holo-info janela-info"><span id="janelaInfo">Carregando 3D…</span></p>
+    <button class="holo-repetir" type="button" id="janelaRepetir" hidden>Ver subir de novo</button>
+  </div>
   <div class="janela-pe">
-    <p>Gravação da demonstração com dados fictícios.</p>
-    <a class="pill pill-cheio pill-sm" href="demo/index.html">Explorar em 3D</a>
+    <p>Arraste para girar · dados fictícios</p>
+    <a class="pill pill-cheio pill-sm" href="demo/index.html">Abrir a demonstração completa</a>
   </div>
 </dialog>
 
