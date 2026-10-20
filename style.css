@@ -250,7 +250,7 @@ form button[disabled] { opacity: .6; cursor: progress; }
   .janela-pe p { text-align: center; }
   .janela-pe .pill { margin-left: 0; }
   .janela-tela canvas { filter: drop-shadow(0 0 4px rgba(150, 205, 255, .5)); }
-  .janela-info { top: 8; bottom: auto; }
+  .janela-info { top: 8px; bottom: auto; }
 }
 
 /* ---------- Entrada suave ao rolar ---------- */
